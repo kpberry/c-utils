@@ -317,6 +317,10 @@ HASHMAP* hashmap_new(hashmap_hash_fn hash, hashmap_comp_fn comp,
 	hm->size = 0;
 	hm->capacity = 1;
 	hm->data = malloc(sizeof(HASHMAP_KV) * hm->capacity);
+    if (hm->data == NULL) {
+        free(hm);
+        return NULL;
+    }
 	for (size_t i = 0; i < hm->capacity; i++) {
 		hm->data[i].distance_from_desired = -1;
 	}
