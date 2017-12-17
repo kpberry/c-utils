@@ -27,10 +27,12 @@ typedef struct {
 } HASHMAP;
 
 typedef enum {
-    NULL_HASH_MAP,
+    NULL_HASHMAP,
     KEY_NOT_PRESENT,
     REALLOCATION_FAILURE,
-    SUCCESS
+    SUCCESS,
+    NULL_KEY_OUT,
+    NULL_VALUE_OUT
 } HASHMAP_STATUS;
 
 HASHMAP_STATUS hashmap_put(HASHMAP* hm, void* key, void* value);

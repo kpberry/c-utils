@@ -331,6 +331,9 @@ HASHMAP* hashmap_new(hashmap_hash_fn hash, hashmap_comp_fn comp,
 }
 
 HASHMAP_STATUS hashmap_free(HASHMAP* hm) {
+    if (hm == NULL) {
+        return NULL_HASHMAP;
+    }
 	for (size_t i = 0; i < hm->capacity; i++) {
 		if (hm->data[i].distance_from_desired >= 0) {
 			hm->key_free(hm->data[i].key);
@@ -344,6 +347,9 @@ HASHMAP_STATUS hashmap_free(HASHMAP* hm) {
 
 
 HASHMAP_STATUS hashmap_put(HASHMAP* hm, void* key, void* value) {
+    if (hm == NULL) {
+        return NULL_HASHMAP;
+    }
 	HASHMAP_STATUS status;
 	if (hm->size / (double) hm->capacity >= hm->load_factor) {
 		status = hashmap_grow(hm);
@@ -384,6 +390,9 @@ HASHMAP_STATUS hashmap_put(HASHMAP* hm, void* key, void* value) {
 }
 
 HASHMAP_STATUS hashmap_grow(HASHMAP* hm) {
+    if (hm == NULL) {
+        return NULL_HASHMAP;
+    }
 	size_t old_capacity = hm->size;
 	int prime_index = hm->prime_index + 1;
 	size_t new_capacity = primes[prime_index];
@@ -423,6 +432,12 @@ HASHMAP_STATUS hashmap_grow(HASHMAP* hm) {
 }
 
 HASHMAP_STATUS hashmap_get(HASHMAP* hm, void* key, void** out) {
+    if (hm == NULL) {
+        return NULL_HASHMAP;
+    }
+    if (out == NULL) {
+        return NULL_OUT;
+    }
 	HASHMAP_KV* index = hm->data + mod_fns[hm->prime_index](hm->hash(key));
 	for (size_t count = 0;; ++index, ++count) {
 		if (index->distance_from_desired < count) {
@@ -436,6 +451,9 @@ HASHMAP_STATUS hashmap_get(HASHMAP* hm, void* key, void** out) {
 }
 
 HASHMAP_STATUS hashmap_del(HASHMAP* hm, void* key) {
+    if (hm == NULL) {
+        return NULL_HASHMAP;
+    }
 	HASHMAP_KV* index = hm->data + mod_fns[hm->prime_index](hm->hash(key));
 	for (size_t count = 0;; ++index, ++count) {
 		if (index->distance_from_desired < count) {
@@ -452,6 +470,15 @@ HASHMAP_STATUS hashmap_del(HASHMAP* hm, void* key) {
 
 HASHMAP_STATUS hashmap_remove(
 	HASHMAP* hm, void* key, void** key_out, void** value_out) {
+    if (hm == NULL) {
+        return NULL_HASHMAP;
+    }
+    if (key == NULL) {
+        return NULL_KEY_OUT;
+    }
+    if (key == NULL) {
+        return NULL_VALUE_OUT;
+    }
 	HASHMAP_KV* index = hm->data + mod_fns[hm->prime_index](hm->hash(key));
 	for (size_t count = 0;; ++index, ++count) {
 		if (index->distance_from_desired < count) {
