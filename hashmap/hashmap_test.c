@@ -23,7 +23,7 @@ int main() {
 	getrlimit(RLIMIT_STACK, &limit);
 	printf ("Stack Limit: %ld\n", limit.rlim_cur);
 
-	int size = 100000000;
+	int size = 1000000;
 	printf("Size: %d\n", size);
 	printf("If you want to test truly big sizes, call `ulimit -s unlimited`\n");
 
