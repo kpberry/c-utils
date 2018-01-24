@@ -27,6 +27,7 @@ typedef struct {
 } HASHMAP;
 
 typedef enum {
+    NULL_OUT,
     NULL_HASHMAP,
     KEY_NOT_PRESENT,
     REALLOCATION_FAILURE,
