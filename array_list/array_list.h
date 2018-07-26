@@ -1,5 +1,5 @@
 #ifndef ARRAY_LIST_H
-	#define ARRAY_LIST_H
+    #define ARRAY_LIST_H
 #include <stdlib.h>
 #include <stdio.h>
 #include "array_list.h"
@@ -8,22 +8,22 @@ typedef void (*array_list_free_func)(void*);
 typedef int (*array_list_comp_func)(const void*, const void*);
 
 typedef struct {
-	void** data;
-	size_t size;
-	size_t capacity;
-	array_list_free_func free_func;
+    void** data;
+    size_t size;
+    size_t capacity;
+    array_list_free_func free_func;
 } ARRAY_LIST;
 
 typedef enum {
-	SUCCESS,
-	NULL_ARRAY_LIST,
-	NULL_FREE_FUNC,
-	NULL_COMP_FUNC,
-	NULL_OUT,
-	OUT_OF_BOUNDS,
-	ALLOCATION_FAILURE,
-	KEY_NOT_FOUND,
-	EMPTY_ARRAY_LIST
+    SUCCESS,
+    NULL_ARRAY_LIST,
+    NULL_FREE_FUNC,
+    NULL_COMP_FUNC,
+    NULL_OUT,
+    OUT_OF_BOUNDS,
+    ALLOCATION_FAILURE,
+    KEY_NOT_FOUND,
+    EMPTY_ARRAY_LIST
 } ARRAY_LIST_STATUS;
 
 ARRAY_LIST* array_list_new(size_t capacity, array_list_free_func free_func);

@@ -24,13 +24,13 @@ int main() {
     }
 
     for (int i = 3; i < 210; i += 6) {
-    	int* data = (int*) malloc(sizeof(int));
+        int* data = (int*) malloc(sizeof(int));
         *data = i;
         if (array_list_insert(al, data, i) == SUCCESS) {
-        	printf("%d, ", *data);
+            printf("%d, ", *data);
         } else {
-        	printf("Access out of bounds.\n");
-        	free(data);
+            printf("Access out of bounds.\n");
+            free(data);
         }
     }
 
@@ -38,14 +38,14 @@ int main() {
     int* data;
     int twenty = 20;
     if (array_list_bsearch(al, (const void**) &twenty, 
-    	                   int_compar, (void**) &data) == SUCCESS) {
-    	printf("%d\n", *data);
+                           int_compar, (void**) &data) == SUCCESS) {
+        printf("%d\n", *data);
     } else {
-    	printf("20 not found\n");
+        printf("20 not found\n");
     }
     
     for (int i = 0; i < al->size; i++) {
-    	printf("%d, ", *(int*) al->data[i]);
+        printf("%d, ", *(int*) al->data[i]);
     }
 
     for (int i = 160; i >= 10; i--) {
